@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		A81AAE9812617544508198DF /* Pods_IssuesApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAEB14C7B584430DD0BA229 /* Pods_IssuesApp.framework */; };
 		D73C09DE1FA345A000B8DC58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09DD1FA345A000B8DC58 /* AppDelegate.swift */; };
-		D73C09E01FA345A000B8DC58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09DF1FA345A000B8DC58 /* ViewController.swift */; };
 		D73C09E31FA345A000B8DC58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D73C09E11FA345A000B8DC58 /* Main.storyboard */; };
 		D73C09E51FA345A000B8DC58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D73C09E41FA345A000B8DC58 /* Assets.xcassets */; };
 		D73C09E81FA345A000B8DC58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D73C09E61FA345A000B8DC58 /* LaunchScreen.storyboard */; };
+		D73C09F11FA3742300B8DC58 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09F01FA3742300B8DC58 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,11 +20,11 @@
 		AFAEB14C7B584430DD0BA229 /* Pods_IssuesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssuesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D73C09DA1FA345A000B8DC58 /* IssuesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssuesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D73C09DD1FA345A000B8DC58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D73C09DF1FA345A000B8DC58 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D73C09E21FA345A000B8DC58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D73C09E41FA345A000B8DC58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D73C09E71FA345A000B8DC58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D73C09E91FA345A000B8DC58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D73C09F01FA3742300B8DC58 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		FBFCA7132A98109B71E0291A /* Pods-IssuesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssuesApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IssuesApp/Pods-IssuesApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,14 +78,22 @@
 		D73C09DC1FA345A000B8DC58 /* IssuesApp */ = {
 			isa = PBXGroup;
 			children = (
+				D73C09EF1FA3740C00B8DC58 /* View */,
 				D73C09DD1FA345A000B8DC58 /* AppDelegate.swift */,
-				D73C09DF1FA345A000B8DC58 /* ViewController.swift */,
 				D73C09E11FA345A000B8DC58 /* Main.storyboard */,
 				D73C09E41FA345A000B8DC58 /* Assets.xcassets */,
 				D73C09E61FA345A000B8DC58 /* LaunchScreen.storyboard */,
 				D73C09E91FA345A000B8DC58 /* Info.plist */,
 			);
 			path = IssuesApp;
+			sourceTree = "<group>";
+		};
+		D73C09EF1FA3740C00B8DC58 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D73C09F01FA3742300B8DC58 /* LoginViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,9 +173,18 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-IssuesApp/Pods-IssuesApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/OAuthSwift/OAuthSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OAuthSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -214,7 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D73C09E01FA345A000B8DC58 /* ViewController.swift in Sources */,
+				D73C09F11FA3742300B8DC58 /* LoginViewController.swift in Sources */,
 				D73C09DE1FA345A000B8DC58 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,7 +376,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosDeveloper.IssuesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -375,7 +392,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosDeveloper.IssuesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

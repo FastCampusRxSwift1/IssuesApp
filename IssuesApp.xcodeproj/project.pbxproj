@@ -14,6 +14,8 @@
 		D73C09E81FA345A000B8DC58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D73C09E61FA345A000B8DC58 /* LaunchScreen.storyboard */; };
 		D73C09F11FA3742300B8DC58 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09F01FA3742300B8DC58 /* LoginViewController.swift */; };
 		D73C09F41FA37C3700B8DC58 /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09F31FA37C3700B8DC58 /* GlobalState.swift */; };
+		D73C09F61FA37D0400B8DC58 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09F51FA37D0400B8DC58 /* API.swift */; };
+		D73C09F81FA37EB200B8DC58 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09F71FA37EB200B8DC58 /* App.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		D73C09E91FA345A000B8DC58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D73C09F01FA3742300B8DC58 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D73C09F31FA37C3700B8DC58 /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
+		D73C09F51FA37D0400B8DC58 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		D73C09F71FA37EB200B8DC58 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		FBFCA7132A98109B71E0291A /* Pods-IssuesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssuesApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IssuesApp/Pods-IssuesApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,8 +84,8 @@
 		D73C09DC1FA345A000B8DC58 /* IssuesApp */ = {
 			isa = PBXGroup;
 			children = (
-				D73C09F21FA37C0700B8DC58 /* Util */,
 				D73C09EF1FA3740C00B8DC58 /* View */,
+				D73C09F21FA37C0700B8DC58 /* Util */,
 				D73C09DD1FA345A000B8DC58 /* AppDelegate.swift */,
 				D73C09E11FA345A000B8DC58 /* Main.storyboard */,
 				D73C09E41FA345A000B8DC58 /* Assets.xcassets */,
@@ -103,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				D73C09F31FA37C3700B8DC58 /* GlobalState.swift */,
+				D73C09F51FA37D0400B8DC58 /* API.swift */,
+				D73C09F71FA37EB200B8DC58 /* App.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -244,6 +250,8 @@
 			files = (
 				D73C09F11FA3742300B8DC58 /* LoginViewController.swift in Sources */,
 				D73C09DE1FA345A000B8DC58 /* AppDelegate.swift in Sources */,
+				D73C09F61FA37D0400B8DC58 /* API.swift in Sources */,
+				D73C09F81FA37EB200B8DC58 /* App.swift in Sources */,
 				D73C09F41FA37C3700B8DC58 /* GlobalState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

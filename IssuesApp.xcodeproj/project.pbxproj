@@ -16,6 +16,8 @@
 		D73C09F41FA37C3700B8DC58 /* GlobalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09F31FA37C3700B8DC58 /* GlobalState.swift */; };
 		D73C09F61FA37D0400B8DC58 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09F51FA37D0400B8DC58 /* API.swift */; };
 		D73C09F81FA37EB200B8DC58 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09F71FA37EB200B8DC58 /* App.swift */; };
+		D73C09FB1FA3809E00B8DC58 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09FA1FA3809E00B8DC58 /* Model.swift */; };
+		D73C09FF1FA3860300B8DC58 /* DataRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09FE1FA3860300B8DC58 /* DataRequest+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		D73C09F31FA37C3700B8DC58 /* GlobalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalState.swift; sourceTree = "<group>"; };
 		D73C09F51FA37D0400B8DC58 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		D73C09F71FA37EB200B8DC58 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		D73C09FA1FA3809E00B8DC58 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D73C09FE1FA3860300B8DC58 /* DataRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataRequest+Extension.swift"; sourceTree = "<group>"; };
 		FBFCA7132A98109B71E0291A /* Pods-IssuesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssuesApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IssuesApp/Pods-IssuesApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +88,7 @@
 		D73C09DC1FA345A000B8DC58 /* IssuesApp */ = {
 			isa = PBXGroup;
 			children = (
+				D73C09F91FA3808C00B8DC58 /* Model */,
 				D73C09EF1FA3740C00B8DC58 /* View */,
 				D73C09F21FA37C0700B8DC58 /* Util */,
 				D73C09DD1FA345A000B8DC58 /* AppDelegate.swift */,
@@ -106,11 +111,36 @@
 		D73C09F21FA37C0700B8DC58 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				D73C09FD1FA385ED00B8DC58 /* Extension */,
+				D73C09FC1FA385E300B8DC58 /* API */,
 				D73C09F31FA37C3700B8DC58 /* GlobalState.swift */,
-				D73C09F51FA37D0400B8DC58 /* API.swift */,
 				D73C09F71FA37EB200B8DC58 /* App.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		D73C09F91FA3808C00B8DC58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D73C09FA1FA3809E00B8DC58 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D73C09FC1FA385E300B8DC58 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D73C09F51FA37D0400B8DC58 /* API.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		D73C09FD1FA385ED00B8DC58 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D73C09FE1FA3860300B8DC58 /* DataRequest+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +281,8 @@
 				D73C09F11FA3742300B8DC58 /* LoginViewController.swift in Sources */,
 				D73C09DE1FA345A000B8DC58 /* AppDelegate.swift in Sources */,
 				D73C09F61FA37D0400B8DC58 /* API.swift in Sources */,
+				D73C09FB1FA3809E00B8DC58 /* Model.swift in Sources */,
+				D73C09FF1FA3860300B8DC58 /* DataRequest+Extension.swift in Sources */,
 				D73C09F81FA37EB200B8DC58 /* App.swift in Sources */,
 				D73C09F41FA37C3700B8DC58 /* GlobalState.swift in Sources */,
 			);

@@ -93,6 +93,9 @@
                                             <constraint firstAttribute="height" constant="30" id="N6C-D0-xre"/>
                                         </constraints>
                                         <state key="normal" title="Enter"/>
+                                        <connections>
+                                            <segue destination="p6x-Ab-qBa" kind="show" identifier="EnterRepoSegue" id="Wab-Dr-KwF"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Axt-le-nqa">
                                         <rect key="frame" x="0.0" y="120" width="355" height="30"/>
@@ -113,10 +116,29 @@
                         <viewLayoutGuide key="safeArea" id="O7l-Qh-q9C"/>
                     </view>
                     <navigationItem key="navigationItem" title="Repo" id="OMl-Lq-1ha"/>
+                    <connections>
+                        <outlet property="ownerTextField" destination="x2K-wh-AlA" id="Q7V-Um-2hK"/>
+                        <outlet property="repoTextField" destination="FvX-j7-ghd" id="8dm-69-Rif"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enx-hA-QVm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="668" y="-638"/>
+        </scene>
+        <!--Issues-->
+        <scene sceneID="TcE-w7-9vI">
+            <objects>
+                <viewController storyboardIdentifier="IssuesViewController" title="Issues" id="p6x-Ab-qBa" customClass="IssuesViewController" customModule="IssuesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rdq-L4-nYv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="86j-pa-vMd"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5yp-4k-X4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1516" y="-638"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">

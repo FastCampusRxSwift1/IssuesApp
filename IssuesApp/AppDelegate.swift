@@ -17,6 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if !GlobalState.instance.isLoggedIn {
+            let loginViewController = LoginViewController.viewController
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0, execute: { [weak self] in
+                self?.window?.rootViewController?.present(loginViewController, animated: false, completion: nil)
+            })
+        }
         return true
     }
 

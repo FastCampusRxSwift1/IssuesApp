@@ -1,20 +1,17 @@
 //
-//  LoginViewController.swift
+//  RepoViewController.swift
 //  IssuesApp
 //
-//  Created by Leonard on 2017. 10. 27..
+//  Created by Leonard on 2017. 10. 28..
 //  Copyright © 2017년 intmain. All rights reserved.
 //
 
 import UIKit
-import OAuthSwift
 
-class LoginViewController: UIViewController {
-    
-    static var viewController: LoginViewController {
-        guard let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return LoginViewController() }
-        return viewController
-    }
+class RepoViewController: UIViewController {
+
+    @IBOutlet var ownerTextField: UITextField!
+    @IBOutlet var repoTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +25,7 @@ class LoginViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -36,16 +33,18 @@ class LoginViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
-
+ 
+    
+    
+    
 }
 
-
-extension LoginViewController {
-    @IBAction func loginToGitHubButtonTapped() {
-        App.api.getToekn { [weak self] in
-            self?.dismiss(animated: true, completion: {
-            })
-        }
+extension RepoViewController {
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        GlobalState.instance.token = ""
+        let loginViewController = LoginViewController.viewController
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0, execute: { [weak self] in
+            self?.present(loginViewController, animated: true, completion: nil)
+        })
     }
 }

@@ -16,6 +16,7 @@ final class GlobalState {
         case refreshTokenKey
         case ownerKey
         case repoKey
+        case reposKey
     }
     
     var token: String? {
@@ -57,6 +58,22 @@ final class GlobalState {
     var isLoggedIn: Bool {
         let isEmpty = token?.isEmpty ?? false
         return !isEmpty
+    }
+    func addRepo(owner:String, repo: String) {
+        let dict = ["owner": owner, "repo" : repo]
+        var repos: [[String: String]] = (UserDefaults.standard.array(forKey: Constants.reposKey.rawValue) as? [[String : String]]) ?? []
+        repos.append(dict)
+        
+        UserDefaults.standard.set(NSSet(array: repos).allObjects, forKey: Constants.reposKey.rawValue)
+    }
+    var repos: [(owner: String, repo:String)] {
+        let repoDicts: [[String: String]] = (UserDefaults.standard.array(forKey: Constants.reposKey.rawValue) as? [[String : String]]) ?? []
+        let repos = repoDicts.map { (repoDict: [String: String]) -> (String, String) in
+            let owner = repoDict["owner"] ?? ""
+            let repo = repoDict["repo"] ?? ""
+            return (owner, repo)
+        }
+        return repos
     }
 }
 

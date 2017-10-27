@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A81AAE9812617544508198DF /* Pods_IssuesApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAEB14C7B584430DD0BA229 /* Pods_IssuesApp.framework */; };
+		D73487341FA391F600E9C4DC /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73487331FA391F600E9C4DC /* ReposViewController.swift */; };
 		D73C09DE1FA345A000B8DC58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09DD1FA345A000B8DC58 /* AppDelegate.swift */; };
 		D73C09E31FA345A000B8DC58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D73C09E11FA345A000B8DC58 /* Main.storyboard */; };
 		D73C09E51FA345A000B8DC58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D73C09E41FA345A000B8DC58 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		56DAF23B3BF3163B660FC98A /* Pods-IssuesApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssuesApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-IssuesApp/Pods-IssuesApp.release.xcconfig"; sourceTree = "<group>"; };
 		AFAEB14C7B584430DD0BA229 /* Pods_IssuesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssuesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D73487331FA391F600E9C4DC /* ReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
 		D73C09DA1FA345A000B8DC58 /* IssuesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssuesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D73C09DD1FA345A000B8DC58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D73C09E21FA345A000B8DC58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				D73C09F01FA3742300B8DC58 /* LoginViewController.swift */,
 				D73C0A001FA3883B00B8DC58 /* RepoViewController.swift */,
 				D73C0A021FA38C4100B8DC58 /* IssuesViewController.swift */,
+				D73487331FA391F600E9C4DC /* ReposViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			files = (
 				D73C0A011FA3883B00B8DC58 /* RepoViewController.swift in Sources */,
 				D73C09F11FA3742300B8DC58 /* LoginViewController.swift in Sources */,
+				D73487341FA391F600E9C4DC /* ReposViewController.swift in Sources */,
 				D73C09DE1FA345A000B8DC58 /* AppDelegate.swift in Sources */,
 				D73C0A031FA38C4100B8DC58 /* IssuesViewController.swift in Sources */,
 				D73C09F61FA37D0400B8DC58 /* API.swift in Sources */,

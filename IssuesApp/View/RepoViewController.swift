@@ -40,6 +40,7 @@ class RepoViewController: UIViewController {
             guard let owner = ownerTextField.text, let repo = repoTextField.text else { return }
             GlobalState.instance.owner = owner
             GlobalState.instance.repo = repo
+            GlobalState.instance.addRepo(owner: owner, repo: repo)
         }
     }
  
@@ -52,5 +53,16 @@ extension RepoViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.0, execute: { [weak self] in
             self?.present(loginViewController, animated: true, completion: nil)
         })
+    }
+    
+    @IBAction func unwindFromRepos(_ segue: UIStoryboardSegue) {
+        if let reposViewController = segue.source as?  ReposViewController, let (owner, repo) = reposViewController.selectedRepo {
+            ownerTextField.text = owner
+            repoTextField.text = repo
+            DispatchQueue.main.async { [weak self] in
+                self?.performSegue(withIdentifier: "EnterRepoSegue", sender: nil)
+            }
+            
+        }
     }
 }

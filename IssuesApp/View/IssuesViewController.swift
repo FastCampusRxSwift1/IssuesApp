@@ -13,19 +13,12 @@ class IssuesViewController: UIViewController {
 
     let owner = GlobalState.instance.owner
     let repo = GlobalState.instance.repo
-
+    var datasource: [Model.Issue] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         
-        App.api.repoIssues(owner: owner, repo: repo, page: 1, handler: { (response: DataResponse<[Model.Issue]>) in
-            switch response.result {
-            case .success(let items):
-                print("issues: \(items)")
-            case .failure:
-                break
-            }
-        })
         // Do any additional setup after loading the view.
     }
 
@@ -45,4 +38,25 @@ class IssuesViewController: UIViewController {
     }
     */
 
+}
+
+extension IssuesViewController {
+    func setup() {
+        load()
+    }
+    
+    func load() {
+        App.api.repoIssues(owner: owner, repo: repo, page: 1, handler: { (response: DataResponse<[Model.Issue]>) in
+            switch response.result {
+            case .success(let items):
+                print("issues: \(items)")
+            case .failure:
+                break
+            }
+        })
+    }
+    
+    func dataLoaded(items: [Model.Issue]) {
+        
+    }
 }

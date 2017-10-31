@@ -73,6 +73,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D729565D1FA7890D00BBF451 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		D73C09D11FA345A000B8DC58 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +116,7 @@
 		D73C09EF1FA3740C00B8DC58 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D729565D1FA7890D00BBF451 /* Cell */,
 				D73C09F01FA3742300B8DC58 /* LoginViewController.swift */,
 				D73C0A001FA3883B00B8DC58 /* RepoViewController.swift */,
 				D73C0A021FA38C4100B8DC58 /* IssuesViewController.swift */,

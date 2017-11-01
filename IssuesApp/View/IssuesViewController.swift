@@ -14,6 +14,7 @@ class IssuesViewController: UIViewController {
     let owner = GlobalState.instance.owner
     let repo = GlobalState.instance.repo
     var datasource: [Model.Issue] = []
+    fileprivate let estimateCell: IssueCell = IssueCell.cellFromNib
     @IBOutlet var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -44,7 +45,7 @@ class IssuesViewController: UIViewController {
 extension IssuesViewController {
     func setup() {
         collectionView.dataSource = self
-//        collectionView.delegate = self
+        collectionView.delegate = self
         collectionView.register(UINib(nibName: "IssueCell", bundle: nil), forCellWithReuseIdentifier: "IssueCell")
         load()
     }
@@ -80,5 +81,15 @@ extension IssuesViewController: UICollectionViewDataSource {
         let item = datasource[indexPath.item]
         cell.update(data: item)
         return cell
+    }
+}
+
+extension IssuesViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let data = datasource[indexPath.item]
+        estimateCell.update(data: data)
+        let targetSize =  CGSize(width: collectionView.frame.size.width, height: 50)
+        let estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
+        return estimatedSize
     }
 }

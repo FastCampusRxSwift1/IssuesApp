@@ -37,12 +37,12 @@ protocol LoadMoreable: class {
 class IssuesViewController: UIViewController, DatasourceRefreshable {
     var needRefreshDatasource: Bool = false
 
+    fileprivate let estimateCell: IssueCell = IssueCell.cellFromNib
+    let refreshControl = UIRefreshControl()
+    @IBOutlet var collectionView: UICollectionView!
     lazy var owner: String = { return GlobalState.instance.owner }()
     lazy var repo: String  = { return GlobalState.instance.repo }()
     var datasource: [Model.Issue] = []
-    fileprivate let estimateCell: IssueCell = IssueCell.cellFromNib
-    @IBOutlet var collectionView: UICollectionView!
-    let refreshControl = UIRefreshControl()
     var loadMoreCell: LoadMoreFooterView?
     var canLoadMore: Bool = true
     var isLoading: Bool = false
@@ -166,10 +166,6 @@ extension IssuesViewController: UICollectionViewDelegateFlowLayout {
         let estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
         return estimatedSize
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return CGSize.zero
-//    }
 }
 
 extension IssuesViewController: UICollectionViewDelegate {

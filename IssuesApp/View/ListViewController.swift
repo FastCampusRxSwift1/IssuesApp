@@ -27,26 +27,22 @@ extension DatasourceRefreshable {
     }
 }
 
-//protocol LoadMoreable: class {
-//    var canLoadMore: Bool { get set }
-//    var loadMoreCell: LoadMoreFooterView? { get set }
-//    func loadMore(indexPath: IndexPath)
-//    var isLoading: Bool { get set }
-//}
-
-class ListViewController: UIViewController, DatasourceRefreshable {
+class ListViewController<CellType: UICollectionViewCell & CellProtocol>: UIViewController, DatasourceRefreshable, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+    typealias Item = CellType.Item
+    typealias ResponsesHandler = (DataResponse<[Item]>) -> Void
     var needRefreshDatasource: Bool = false
 
-    fileprivate let estimateCell: IssueCell = IssueCell.cellFromNib
+    fileprivate let estimateCell: CellType = CellType.cellFromNib
     let refreshControl = UIRefreshControl()
     @IBOutlet var collectionView: UICollectionView!
     lazy var owner: String = { return GlobalState.instance.owner }()
     lazy var repo: String  = { return GlobalState.instance.repo }()
-    var datasource: [Model.Issue] = []
+    var datasource: [Item] = []
     var loadMoreCell: LoadMoreFooterView?
     var canLoadMore: Bool = true
     var isLoading: Bool = false
     var page: Int = 1
+    var api: ((Int, @escaping ResponsesHandler) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,49 +66,6 @@ class ListViewController: UIViewController, DatasourceRefreshable {
         // Pass the selected object to the new view controller.
     }
     */
-
-}
-
-extension ListViewController {
-    func setup() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(UINib(nibName: "IssueCell", bundle: nil), forCellWithReuseIdentifier: "IssueCell")
-        collectionView.refreshControl = refreshControl
-        collectionView.alwaysBounceVertical = true
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        load()
-        loadMoreCell?.load()
-    }
-    
-    func load() {
-        guard isLoading == false else {return }
-        isLoading = true
-        App.api.repoIssues(owner: owner, repo: repo, page: page, handler: { [weak self] (response: DataResponse<[Model.Issue]>) in
-            guard let `self` = self else { return }
-            switch response.result {
-            case .success(let items):
-                print("issues: \(items)")
-                self.dataLoaded(items: items)
-            case .failure:
-                break
-            }
-        })
-    }
-    
-    func dataLoaded(items: [Model.Issue]) {
-        refreshDataSourceIfNeeded()
-        
-        page += 1
-        if items.isEmpty {
-            canLoadMore = false
-            loadMoreCell?.loadDone()
-        }
-        
-        refreshControl.endRefreshing()
-        datasource.append(contentsOf: items)
-        collectionView.reloadData()
-    }
     
     @objc func refresh() {
         page = 1
@@ -122,21 +75,13 @@ extension ListViewController {
         load()
     }
     
-    func loadMore(indexPath: IndexPath) {
-        guard  indexPath.item == datasource.count - 1 && !isLoading && canLoadMore else { return }
-        load()
-    }
-}
-
-extension ListViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return datasource.count
     }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IssueCell", for: indexPath) as? IssueCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellName(), for: indexPath) as? CellType else { return UICollectionViewCell() }
         let item = datasource[indexPath.item]
         cell.update(data: item)
         return cell
@@ -156,9 +101,7 @@ extension ListViewController: UICollectionViewDataSource {
             return UICollectionReusableView()
         }
     }
-}
-
-extension ListViewController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let data = datasource[indexPath.item]
         estimateCell.update(data: data)
@@ -166,10 +109,66 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
         let estimatedSize = estimateCell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: UILayoutPriorityRequired, verticalFittingPriority: UILayoutPriorityDefaultLow)
         return estimatedSize
     }
-}
-
-extension ListViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         loadMore(indexPath: indexPath)
     }
+    
+    func cellName() -> String  {
+        return ""
+    }
+
 }
+
+extension ListViewController {
+    func setup() {
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(UINib(nibName: cellName(), bundle: nil), forCellWithReuseIdentifier: cellName())
+        collectionView.refreshControl = refreshControl
+        collectionView.alwaysBounceVertical = true
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        load()
+        loadMoreCell?.load()
+    }
+    
+    func load() {
+        guard isLoading == false else {return }
+        isLoading = true
+        
+        api?(page, { [weak self] (response: DataResponse<[Item]>) -> Void in
+            guard let `self` = self else { return }
+            switch response.result {
+            case .success(let items):
+                print("issues: \(items)")
+                self.dataLoaded(items: items)
+                self.isLoading = false
+            case .failure:
+                self.isLoading = false
+                break
+            }
+        })
+    }
+    
+    func dataLoaded(items: [Item]) {
+        refreshDataSourceIfNeeded()
+        
+        page += 1
+        if items.isEmpty {
+            canLoadMore = false
+            loadMoreCell?.loadDone()
+        }
+        
+        refreshControl.endRefreshing()
+        datasource.append(contentsOf: items)
+        collectionView.reloadData()
+    }
+    
+    
+    
+    func loadMore(indexPath: IndexPath) {
+        guard  indexPath.item == datasource.count - 1 && !isLoading && canLoadMore else { return }
+        load()
+    }
+}
+

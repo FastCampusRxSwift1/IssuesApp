@@ -254,6 +254,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="aud-20-2wn" id="kzB-dp-GqS"/>
+                        <outlet property="collectionView_" destination="aud-20-2wn" id="0nt-KQ-bxW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yp-4k-X4U" userLabel="First Responder" sceneMemberID="firstResponder"/>

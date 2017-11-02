@@ -15,7 +15,7 @@ protocol API {
     typealias IssueResponsesHandler = (DataResponse<[Model.Issue]>) -> Void
     func getToekn(handler: @escaping (() -> Void))
     func tokenRefresh(handler: @escaping (() -> Void))
-    func repoIssues(owner: String, repo: String, page: Int, handler: @escaping IssueResponsesHandler) -> Void
+    func repoIssues(owner: String, repo: String) -> (Int, @escaping IssueResponsesHandler) -> Void
 }
 
 struct GitHubAPI: API {
@@ -54,15 +54,17 @@ struct GitHubAPI: API {
         })
     }
     
-    func repoIssues(owner: String, repo: String, page: Int, handler: @escaping IssueResponsesHandler) -> Void {
-        let parameters: Parameters = ["page": page, "state": "all"]
-        GitHubRouter.manager.request(GitHubRouter.repoIssues(owner: owner, repo: repo, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-            let result = dataResponse.map({ (json: JSON) -> [Model.Issue] in
-                return json.arrayValue.map {
-                    Model.Issue(json: $0)
-                }
-            })
-            handler(result)
+    func repoIssues(owner: String, repo: String) -> (Int, @escaping IssueResponsesHandler) -> Void {
+        return { (page, handler) in
+            let parameters: Parameters = ["page": page, "state": "all"]
+            GitHubRouter.manager.request(GitHubRouter.repoIssues(owner: owner, repo: repo, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
+                let result = dataResponse.map({ (json: JSON) -> [Model.Issue] in
+                    return json.arrayValue.map {
+                        Model.Issue(json: $0)
+                    }
+                })
+                handler(result)
+            }
         }
     }
 }

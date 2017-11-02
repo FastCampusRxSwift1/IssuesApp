@@ -23,7 +23,8 @@
 		D73C09FB1FA3809E00B8DC58 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09FA1FA3809E00B8DC58 /* Model.swift */; };
 		D73C09FF1FA3860300B8DC58 /* DataRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C09FE1FA3860300B8DC58 /* DataRequest+Extension.swift */; };
 		D73C0A011FA3883B00B8DC58 /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C0A001FA3883B00B8DC58 /* RepoViewController.swift */; };
-		D73C0A031FA38C4100B8DC58 /* IssuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C0A021FA38C4100B8DC58 /* IssuesViewController.swift */; };
+		D73C0A031FA38C4100B8DC58 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73C0A021FA38C4100B8DC58 /* ListViewController.swift */; };
+		D73E95BC1FAB4F06008955D5 /* IssuesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73E95BB1FAB4F06008955D5 /* IssuesViewController.swift */; };
 		D7DB7F941FA8E13F00B90DC7 /* IssueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DB7F931FA8E13F00B90DC7 /* IssueCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +48,8 @@
 		D73C09FA1FA3809E00B8DC58 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D73C09FE1FA3860300B8DC58 /* DataRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataRequest+Extension.swift"; sourceTree = "<group>"; };
 		D73C0A001FA3883B00B8DC58 /* RepoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewController.swift; sourceTree = "<group>"; };
-		D73C0A021FA38C4100B8DC58 /* IssuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesViewController.swift; sourceTree = "<group>"; };
+		D73C0A021FA38C4100B8DC58 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		D73E95BB1FAB4F06008955D5 /* IssuesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssuesViewController.swift; sourceTree = "<group>"; };
 		D7DB7F931FA8E13F00B90DC7 /* IssueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCell.swift; sourceTree = "<group>"; };
 		FBFCA7132A98109B71E0291A /* Pods-IssuesApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssuesApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IssuesApp/Pods-IssuesApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,8 +133,9 @@
 				D729565D1FA7890D00BBF451 /* Cell */,
 				D73C09F01FA3742300B8DC58 /* LoginViewController.swift */,
 				D73C0A001FA3883B00B8DC58 /* RepoViewController.swift */,
-				D73C0A021FA38C4100B8DC58 /* IssuesViewController.swift */,
+				D73C0A021FA38C4100B8DC58 /* ListViewController.swift */,
 				D73487331FA391F600E9C4DC /* ReposViewController.swift */,
+				D73E95BB1FAB4F06008955D5 /* IssuesViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -314,13 +317,14 @@
 				D73C09F11FA3742300B8DC58 /* LoginViewController.swift in Sources */,
 				D73487341FA391F600E9C4DC /* ReposViewController.swift in Sources */,
 				D73C09DE1FA345A000B8DC58 /* AppDelegate.swift in Sources */,
-				D73C0A031FA38C4100B8DC58 /* IssuesViewController.swift in Sources */,
+				D73C0A031FA38C4100B8DC58 /* ListViewController.swift in Sources */,
 				D73C09F61FA37D0400B8DC58 /* API.swift in Sources */,
 				D73C09FB1FA3809E00B8DC58 /* Model.swift in Sources */,
 				D7372F6D1FAA1F62009CC7A5 /* LoadMoreFooterView.swift in Sources */,
 				D73C09FF1FA3860300B8DC58 /* DataRequest+Extension.swift in Sources */,
 				D73C09F81FA37EB200B8DC58 /* App.swift in Sources */,
 				D73C09F41FA37C3700B8DC58 /* GlobalState.swift in Sources */,
+				D73E95BC1FAB4F06008955D5 /* IssuesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +468,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosDeveloper.IssuesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -480,6 +485,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.iosDeveloper.IssuesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

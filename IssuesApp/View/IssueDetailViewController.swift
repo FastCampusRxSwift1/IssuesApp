@@ -8,12 +8,24 @@
 
 import UIKit
 
-class IssueDetailViewController: UIViewController {
+class IssueDetailViewController: ListViewController<IssueCommentCell> {
 
+    @IBOutlet override var collectionView: UICollectionView! {
+        get {
+            return collectionView_
+        }
+        set {
+            collectionView_ = newValue
+        }
+    }
+    @IBOutlet var collectionView_: UICollectionView!
+    
     var issue: Model.Issue!
     override func viewDidLoad() {
+        api = App.api.issueComment(owner: owner, repo: repo, number: issue.number)
         super.viewDidLoad()
-
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -22,6 +34,9 @@ class IssueDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func cellName() -> String  {
+        return "IssueCommentCell"
+    }
 
     /*
     // MARK: - Navigation

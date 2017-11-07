@@ -284,6 +284,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </collectionReusableView>
+                                <connections>
+                                    <outlet property="dataSource" destination="ccX-Ta-8IJ" id="WE2-ps-nEL"/>
+                                    <outlet property="delegate" destination="ccX-Ta-8IJ" id="xfP-rj-u89"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -295,6 +299,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HRe-lz-qNC"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView_" destination="cDm-QZ-gZs" id="egA-WP-DC5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfX-K4-anU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

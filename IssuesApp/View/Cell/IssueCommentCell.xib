@@ -13,7 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IssueCommentCell" id="OdU-WY-PYS" customClass="IssueCommentCell" customModule="GithubIssues">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IssueCommentCell" id="OdU-WY-PYS" customClass="IssueCommentCell" customModule="IssuesApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -111,10 +111,10 @@
             <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
             <viewLayoutGuide key="safeArea" id="LmA-v1-qqy"/>
             <connections>
-                <outlet property="bodyLabel" destination="1mI-TR-bk1" id="Y7s-I6-1FU"/>
-                <outlet property="commentContanerView" destination="FMY-oM-qZ3" id="xCL-uB-4aV"/>
-                <outlet property="profileImageView" destination="5Yw-Yb-oVB" id="HNX-Pq-wHk"/>
-                <outlet property="titleLabel" destination="yga-ve-hfe" id="ht1-bf-pY0"/>
+                <outlet property="bodyLabel" destination="1mI-TR-bk1" id="Pc4-0f-0QB"/>
+                <outlet property="commentContanerView" destination="ZP6-U8-2zu" id="uS7-1k-Dsm"/>
+                <outlet property="profileImageView" destination="5Yw-Yb-oVB" id="Fg8-ac-lfT"/>
+                <outlet property="titleLabel" destination="yga-ve-hfe" id="U52-1g-BMO"/>
             </connections>
             <point key="canvasLocation" x="-59" y="-106"/>
         </collectionViewCell>

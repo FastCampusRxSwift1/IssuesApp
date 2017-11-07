@@ -10,6 +10,8 @@ import UIKit
 
 class IssueDetailViewController: ListViewController<IssueCommentCell> {
 
+    var issue: Model.Issue!
+    var headerSize: CGSize = CGSize.zero
     @IBOutlet override var collectionView: UICollectionView! {
         get {
             return collectionView_
@@ -20,7 +22,6 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     }
     @IBOutlet var collectionView_: UICollectionView!
     
-    var issue: Model.Issue!
     override func viewDidLoad() {
         api = App.api.issueComment(owner: owner, repo: repo, number: issue.number)
         super.viewDidLoad()
@@ -36,6 +37,38 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     
     override func cellName() -> String  {
         return "IssueCommentCell"
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+            
+        case UICollectionElementKindSectionHeader:
+            
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IssueDetailHeaderView", for: indexPath) as? IssueDetailHeaderView ?? IssueDetailHeaderView()
+            
+            headerView.update(data: issue)
+//            headerView.stateButton.addTarget(self, action: #selector(stateButtonTapped), for: .touchUpInside)
+            return headerView
+            
+        case UICollectionElementKindSectionFooter:
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "LoadMoreFooterView", for: indexPath) as? LoadMoreFooterView ?? LoadMoreFooterView()
+            
+            loadMoreCell = footerView
+            return footerView
+            
+        default:
+            
+            assert(false, "Unexpected element kind")
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        if headerSize == CGSize.zero {
+            headerSize = IssueDetailHeaderView.headerSize(issue: issue, width: collectionView.frame.width)
+            
+        }
+        return headerSize
     }
 
     /*

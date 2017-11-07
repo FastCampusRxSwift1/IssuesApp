@@ -122,6 +122,11 @@ class ListViewController<CellType: UICollectionViewCell & CellProtocol>: UIViewC
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize
+    {
+        return CGSize.zero
+    }
 
 }
 

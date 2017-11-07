@@ -9,6 +9,7 @@
 import UIKit
 
 class IssuesViewController: ListViewController<IssueCell> {
+
     @IBOutlet override var collectionView: UICollectionView! {
         get {
             return collectionView_
@@ -32,18 +33,24 @@ class IssuesViewController: ListViewController<IssueCell> {
     }
     
 
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        guard let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
+        guard let viewConroller = segue.destination as? IssueDetailViewController else { return }
+        let issue = datasource[indexPath.item]
+        viewConroller.issue = issue
     }
-    */
+ 
     
     override func cellName() -> String  {
         return "IssueCell"
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowIssueDetailSegue", sender: nil)
+    }
 }
+
+
+

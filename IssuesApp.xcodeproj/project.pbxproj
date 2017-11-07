@@ -10,6 +10,7 @@
 		A81AAE9812617544508198DF /* Pods_IssuesApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAEB14C7B584430DD0BA229 /* Pods_IssuesApp.framework */; };
 		D70118D41FB1FC8E00B96A53 /* IssueCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D70118D31FB1FC8E00B96A53 /* IssueCommentCell.xib */; };
 		D70118D61FB2007A00B96A53 /* IssueCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70118D51FB2007A00B96A53 /* IssueCommentCell.swift */; };
+		D70118D81FB2082E00B96A53 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70118D71FB2082E00B96A53 /* IssueDetailViewController.swift */; };
 		D72956691FA8C20E00BBF451 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D72956681FA8C20E00BBF451 /* IssueCell.xib */; };
 		D73487341FA391F600E9C4DC /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73487331FA391F600E9C4DC /* ReposViewController.swift */; };
 		D7372F6D1FAA1F62009CC7A5 /* LoadMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7372F6C1FAA1F62009CC7A5 /* LoadMoreFooterView.swift */; };
@@ -35,6 +36,7 @@
 		AFAEB14C7B584430DD0BA229 /* Pods_IssuesApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssuesApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70118D31FB1FC8E00B96A53 /* IssueCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCommentCell.xib; sourceTree = "<group>"; };
 		D70118D51FB2007A00B96A53 /* IssueCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentCell.swift; sourceTree = "<group>"; };
+		D70118D71FB2082E00B96A53 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		D72956681FA8C20E00BBF451 /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
 		D73487331FA391F600E9C4DC /* ReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
 		D7372F6C1FAA1F62009CC7A5 /* LoadMoreFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreFooterView.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				D73C0A021FA38C4100B8DC58 /* ListViewController.swift */,
 				D73487331FA391F600E9C4DC /* ReposViewController.swift */,
 				D73E95BB1FAB4F06008955D5 /* IssuesViewController.swift */,
+				D70118D71FB2082E00B96A53 /* IssueDetailViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				D73C09F11FA3742300B8DC58 /* LoginViewController.swift in Sources */,
 				D73487341FA391F600E9C4DC /* ReposViewController.swift in Sources */,
 				D73C09DE1FA345A000B8DC58 /* AppDelegate.swift in Sources */,
+				D70118D81FB2082E00B96A53 /* IssueDetailViewController.swift in Sources */,
 				D73C0A031FA38C4100B8DC58 /* ListViewController.swift in Sources */,
 				D73C09F61FA37D0400B8DC58 /* API.swift in Sources */,
 				D73C09FB1FA3809E00B8DC58 /* Model.swift in Sources */,

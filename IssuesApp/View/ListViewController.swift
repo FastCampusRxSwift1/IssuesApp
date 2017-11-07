@@ -37,6 +37,7 @@ class ListViewController<CellType: UICollectionViewCell & CellProtocol>: UIViewC
     @IBOutlet var collectionView: UICollectionView!
     lazy var owner: String = { return GlobalState.instance.owner }()
     lazy var repo: String  = { return GlobalState.instance.repo }()
+    
     var datasource: [Item] = []
     var loadMoreCell: LoadMoreFooterView?
     var canLoadMore: Bool = true
@@ -116,6 +117,10 @@ class ListViewController<CellType: UICollectionViewCell & CellProtocol>: UIViewC
     
     func cellName() -> String  {
         return ""
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
     }
 
 }

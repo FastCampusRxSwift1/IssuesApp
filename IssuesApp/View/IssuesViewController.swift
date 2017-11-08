@@ -36,16 +36,21 @@ class IssuesViewController: ListViewController<IssueCell> {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let indexPath = self.collectionView.indexPathsForSelectedItems?.first else { return }
-        guard let viewConroller = segue.destination as? IssueDetailViewController else { return }
-        let issue = datasource[indexPath.item]
-        viewConroller.issue = issue
-        viewConroller.reloadIssue = { [weak self] (issue: Model.Issue) in
-            guard let `self` = self else { return }
-            guard let index = self.datasource.index(of: issue) else { return }
-            self.datasource[index] = issue
-            let indexPath = IndexPath(item: index, section: 0)
-            self.collectionView.reloadItems(at: [indexPath])
+        if let indexPath = self.collectionView.indexPathsForSelectedItems?.first,
+            let viewConroller = segue.destination as? IssueDetailViewController {
+            let issue = datasource[indexPath.item]
+            viewConroller.issue = issue
+            viewConroller.reloadIssue = { [weak self] (issue: Model.Issue) in
+                guard let `self` = self else { return }
+                guard let index = self.datasource.index(of: issue) else { return }
+                self.datasource[index] = issue
+                let indexPath = IndexPath(item: index, section: 0)
+                self.collectionView.reloadItems(at: [indexPath])
+            }
+        } else if let navigationController = segue.destination as? UINavigationController, 
+            let createIssueViewController = navigationController.topViewController as? CreateIssueViewController {
+            createIssueViewController.repo = repo
+            createIssueViewController.owner = owner
         }
     }
  
@@ -59,7 +64,13 @@ class IssuesViewController: ListViewController<IssueCell> {
     }
     
     @IBAction func unwindFromCreate(_ segue: UIStoryboardSegue) {
-        
+        if let createViewController = segue.source as? CreateIssueViewController, let createdIssue = createViewController.createdIssue {
+            datasource.insert(createdIssue, at: 0)
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
+            }
+            
+        }
     }
 
 }

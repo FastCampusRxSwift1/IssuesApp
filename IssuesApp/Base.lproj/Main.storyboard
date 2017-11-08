@@ -276,18 +276,19 @@
                     <navigationItem key="navigationItem" title="Create Issue" id="iWh-3r-QWJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="vjy-85-Ksk">
                             <connections>
-                                <segue destination="ENU-3B-ARQ" kind="unwind" unwindAction="unwindFromCreate:" id="FEV-Jz-m2g"/>
+                                <segue destination="ENU-3B-ARQ" kind="unwind" identifier="UnwindToIssues" unwindAction="unwindFromCreate:" id="FEV-Jz-m2g"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="9hA-4e-3mN">
                             <connections>
-                                <segue destination="ENU-3B-ARQ" kind="unwind" unwindAction="unwindFromCreate:" id="RYS-Re-lRR"/>
+                                <action selector="doneButtonTapped:" destination="vCF-g5-CPX" id="08Z-No-e9O"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="textView" destination="rUg-0U-mRl" id="BKv-3m-eeC"/>
                         <outlet property="titleTextField" destination="xwh-Ic-Yaw" id="APG-0E-6oW"/>
+                        <segue destination="ENU-3B-ARQ" kind="unwind" unwindAction="unwindFromCreate:" id="RXs-lk-N4W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSJ-Ke-5RW" userLabel="First Responder" sceneMemberID="firstResponder"/>

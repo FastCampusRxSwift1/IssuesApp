@@ -293,18 +293,52 @@
                                     <outlet property="delegate" destination="ccX-Ta-8IJ" id="xfP-rj-u89"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0O1-rK-Qct">
+                                <rect key="frame" x="0.0" y="621" width="375" height="46"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yJ6-du-e0N">
+                                        <rect key="frame" x="321" y="8" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="7zT-ig-EFF"/>
+                                        </constraints>
+                                        <state key="normal" title="send"/>
+                                        <connections>
+                                            <action selector="sendButtonTapped:" destination="ccX-Ta-8IJ" eventType="touchUpInside" id="Pzu-4Y-FML"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cy5-eV-DG2">
+                                        <rect key="frame" x="8" y="8" width="305" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="yJ6-du-e0N" secondAttribute="trailing" constant="8" id="4xZ-3u-wYY"/>
+                                    <constraint firstItem="Cy5-eV-DG2" firstAttribute="leading" secondItem="0O1-rK-Qct" secondAttribute="leading" constant="8" id="7kZ-8L-St6"/>
+                                    <constraint firstItem="yJ6-du-e0N" firstAttribute="leading" secondItem="Cy5-eV-DG2" secondAttribute="trailing" constant="8" id="99Q-h8-Cd2"/>
+                                    <constraint firstAttribute="height" constant="46" id="VnB-1H-xos"/>
+                                    <constraint firstItem="yJ6-du-e0N" firstAttribute="centerY" secondItem="0O1-rK-Qct" secondAttribute="centerY" id="YUw-QX-PiJ"/>
+                                    <constraint firstItem="Cy5-eV-DG2" firstAttribute="centerY" secondItem="0O1-rK-Qct" secondAttribute="centerY" id="m9W-cJ-gaU"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cDm-QZ-gZs" firstAttribute="leading" secondItem="HRe-lz-qNC" secondAttribute="leading" id="31o-7q-3Hm"/>
+                            <constraint firstItem="HRe-lz-qNC" firstAttribute="trailing" secondItem="0O1-rK-Qct" secondAttribute="trailing" id="3G1-an-ZPp"/>
                             <constraint firstItem="HRe-lz-qNC" firstAttribute="bottom" secondItem="cDm-QZ-gZs" secondAttribute="bottom" id="FT1-0e-82d"/>
+                            <constraint firstItem="0O1-rK-Qct" firstAttribute="leading" secondItem="HRe-lz-qNC" secondAttribute="leading" id="V2Q-s8-lTC"/>
                             <constraint firstItem="HRe-lz-qNC" firstAttribute="trailing" secondItem="cDm-QZ-gZs" secondAttribute="trailing" id="W9X-SG-InB"/>
                             <constraint firstItem="cDm-QZ-gZs" firstAttribute="top" secondItem="HRe-lz-qNC" secondAttribute="top" id="fuS-Im-E8F"/>
+                            <constraint firstItem="HRe-lz-qNC" firstAttribute="bottom" secondItem="0O1-rK-Qct" secondAttribute="bottom" id="qPd-X5-kVm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HRe-lz-qNC"/>
                     </view>
                     <connections>
                         <outlet property="collectionView_" destination="cDm-QZ-gZs" id="egA-WP-DC5"/>
+                        <outlet property="inputViewBottomConstraint" destination="qPd-X5-kVm" id="irD-bC-ae7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MfX-K4-anU" userLabel="First Responder" sceneMemberID="firstResponder"/>

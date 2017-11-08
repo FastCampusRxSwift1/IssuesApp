@@ -21,12 +21,23 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
         }
     }
     @IBOutlet var collectionView_: UICollectionView!
+    @IBOutlet var inputViewBottomConstraint: NSLayoutConstraint!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addKeyboardNotification()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        removeKeyboardNOtification()
+    }
     
     override func viewDidLoad() {
         api = App.api.issueComment(owner: owner, repo: repo, number: issue.number)
         super.viewDidLoad()
         
-        
+        title = "#\(issue.number)"
         // Do any additional setup after loading the view.
     }
 
@@ -81,4 +92,34 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     }
     */
 
+    @IBAction func sendButtonTapped(_ sender: Any) {
+    }
+}
+
+extension IssueDetailViewController {
+    
+    func addKeyboardNotification() {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil, queue: nil) { [weak self] (notifiaction: Notification) in
+            guard let `self` = self else { return }
+            guard let keyboardBounds = notifiaction.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect else { return }
+            guard let animationDuration = notifiaction.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+            guard let animationCurve = notifiaction.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? UInt else { return }
+            let animationOptions = UIViewAnimationOptions(rawValue: animationCurve)
+            let keyboardHeight = keyboardBounds.height
+            let inputBottom = self.view.frame.height - keyboardBounds.origin.y
+            print("inputBottom: \(inputBottom)")
+            print("keyboard: \(keyboardHeight)")
+            var inset = self.collectionView.contentInset
+            inset.bottom = inputBottom + 46
+            self.collectionView.contentInset = inset
+            self.inputViewBottomConstraint.constant = inputBottom
+            UIView.animate(withDuration: animationDuration, delay: 0, options: animationOptions, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+    }
+    
+    func removeKeyboardNOtification() {
+        NotificationCenter.default.removeObserver(self)
+    }
 }

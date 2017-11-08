@@ -57,6 +57,11 @@ class IssuesViewController: ListViewController<IssueCell> {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "ShowIssueDetailSegue", sender: nil)
     }
+    
+    @IBAction func unwindFromCreate(_ segue: UIStoryboardSegue) {
+        
+    }
+
 }
 
 

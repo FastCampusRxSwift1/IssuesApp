@@ -13,6 +13,7 @@
 		D70118D81FB2082E00B96A53 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70118D71FB2082E00B96A53 /* IssueDetailViewController.swift */; };
 		D70118DB1FB227C800B96A53 /* IssueDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70118D91FB227C700B96A53 /* IssueDetailHeaderView.swift */; };
 		D70118DC1FB227C800B96A53 /* IssueDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D70118DA1FB227C700B96A53 /* IssueDetailHeaderView.xib */; };
+		D70118E21FB357C100B96A53 /* CreateIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70118E11FB357C100B96A53 /* CreateIssueViewController.swift */; };
 		D72956691FA8C20E00BBF451 /* IssueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D72956681FA8C20E00BBF451 /* IssueCell.xib */; };
 		D73487341FA391F600E9C4DC /* ReposViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D73487331FA391F600E9C4DC /* ReposViewController.swift */; };
 		D7372F6D1FAA1F62009CC7A5 /* LoadMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7372F6C1FAA1F62009CC7A5 /* LoadMoreFooterView.swift */; };
@@ -41,6 +42,7 @@
 		D70118D71FB2082E00B96A53 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		D70118D91FB227C700B96A53 /* IssueDetailHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueDetailHeaderView.swift; sourceTree = "<group>"; };
 		D70118DA1FB227C700B96A53 /* IssueDetailHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IssueDetailHeaderView.xib; sourceTree = "<group>"; };
+		D70118E11FB357C100B96A53 /* CreateIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIssueViewController.swift; sourceTree = "<group>"; };
 		D72956681FA8C20E00BBF451 /* IssueCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCell.xib; sourceTree = "<group>"; };
 		D73487331FA391F600E9C4DC /* ReposViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposViewController.swift; sourceTree = "<group>"; };
 		D7372F6C1FAA1F62009CC7A5 /* LoadMoreFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreFooterView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				D73487331FA391F600E9C4DC /* ReposViewController.swift */,
 				D73E95BB1FAB4F06008955D5 /* IssuesViewController.swift */,
 				D70118D71FB2082E00B96A53 /* IssueDetailViewController.swift */,
+				D70118E11FB357C100B96A53 /* CreateIssueViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				D70118D81FB2082E00B96A53 /* IssueDetailViewController.swift in Sources */,
 				D73C0A031FA38C4100B8DC58 /* ListViewController.swift in Sources */,
 				D73C09F61FA37D0400B8DC58 /* API.swift in Sources */,
+				D70118E21FB357C100B96A53 /* CreateIssueViewController.swift in Sources */,
 				D73C09FB1FA3809E00B8DC58 /* Model.swift in Sources */,
 				D7372F6D1FAA1F62009CC7A5 /* LoadMoreFooterView.swift in Sources */,
 				D73C09FF1FA3860300B8DC58 /* DataRequest+Extension.swift in Sources */,

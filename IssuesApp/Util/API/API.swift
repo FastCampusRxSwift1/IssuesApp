@@ -18,6 +18,7 @@ protocol API {
     func tokenRefresh(handler: @escaping (() -> Void))
     func repoIssues(owner: String, repo: String) -> (Int, @escaping IssueResponsesHandler) -> Void
     func issueComment(owner: String, repo: String, number: Int) -> (Int, @escaping CommentResponsesHandler) -> Void
+    func createComment(owner: String, repo: String, number: Int, comment: String, completionHandler: @escaping (DataResponse<Model.Comment>) -> Void )
 }
 
 struct GitHubAPI: API {
@@ -83,11 +84,22 @@ struct GitHubAPI: API {
             }
         }
     }
+    
+    func createComment(owner: String, repo: String, number: Int, comment: String, completionHandler: @escaping (DataResponse<Model.Comment>) -> Void ) {
+        let parameters: Parameters = ["body": comment]
+        GitHubRouter.manager.request(GitHubRouter.createComment(owner: owner, repo: repo, number: number, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
+            let result = dataResponse.map({ (json: JSON) -> Model.Comment in
+                Model.Comment(json: json)
+            })
+            completionHandler(result)
+        }
+    }
 }
 
 enum GitHubRouter {
     case repoIssues(owner: String, repo: String, parameters: Parameters)
     case issueComment(owner: String, repo: String, number: Int, parameters: Parameters)
+    case createComment(owner: String, repo: String, number: Int, parameters: Parameters)
 }
 
 extension GitHubRouter: URLRequestConvertible {
@@ -107,6 +119,8 @@ extension GitHubRouter: URLRequestConvertible {
         case .repoIssues,
              .issueComment:
             return .get
+        case .createComment:
+            return .post
         }
     }
     
@@ -115,6 +129,8 @@ extension GitHubRouter: URLRequestConvertible {
         case let .repoIssues(owner, repo, _):
             return "/repos/\(owner)/\(repo)/issues"
         case let .issueComment(owner, repo, number, _):
+            return "/repos/\(owner)/\(repo)/issues/\(number)/comments"
+        case let .createComment(owner, repo, number, _):
             return "/repos/\(owner)/\(repo)/issues/\(number)/comments"
         }
     }
@@ -133,6 +149,8 @@ extension GitHubRouter: URLRequestConvertible {
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
             case let .issueComment(_, _, _, parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
+        case let .createComment(_, _, _, parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         }
         
         return urlRequest

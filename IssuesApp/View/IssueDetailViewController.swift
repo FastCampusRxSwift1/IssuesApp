@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class IssueDetailViewController: ListViewController<IssueCommentCell> {
 
@@ -22,6 +23,7 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     }
     @IBOutlet var collectionView_: UICollectionView!
     @IBOutlet var inputViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet var commentTextField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -93,6 +95,20 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     */
 
     @IBAction func sendButtonTapped(_ sender: Any) {
+        let comment = commentTextField.text ?? ""
+        App.api.createComment(owner: owner, repo: repo, number: issue.number, comment: comment) { [weak self] (dataResponse: DataResponse<Model.Comment>) in
+            guard let `self` = self else { return }
+            switch dataResponse.result {
+            case .success(let comment):
+                self.addComment(comment: comment)
+                self.commentTextField.text = ""
+                self.commentTextField.resignFirstResponder()
+                
+                break
+            case .failure:
+                break
+            }
+        }
     }
 }
 
@@ -121,5 +137,16 @@ extension IssueDetailViewController {
     
     func removeKeyboardNOtification() {
         NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension IssueDetailViewController {
+    func addComment(comment: Model.Comment) {
+        let newIndexPath = IndexPath(item: datasource.count, section: 0)
+        datasource.append(comment)
+        collectionView.insertItems(at: [newIndexPath])
+        
+        collectionView.scrollToItem(at: newIndexPath, at: .bottom, animated: true)
+        
     }
 }

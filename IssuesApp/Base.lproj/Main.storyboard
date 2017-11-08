@@ -338,6 +338,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView_" destination="cDm-QZ-gZs" id="egA-WP-DC5"/>
+                        <outlet property="commentTextField" destination="Cy5-eV-DG2" id="Zhj-ew-2LB"/>
                         <outlet property="inputViewBottomConstraint" destination="qPd-X5-kVm" id="irD-bC-ae7"/>
                     </connections>
                 </viewController>

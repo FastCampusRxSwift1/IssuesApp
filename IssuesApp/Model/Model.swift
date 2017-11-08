@@ -95,6 +95,12 @@ extension Model.Issue {
     }
 }
 
+extension Model.Issue: Equatable {
+    static func ==(lhs: Model.Issue, rhs: Model.Issue) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
 extension UIColor {
     func toImage(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)

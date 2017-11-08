@@ -40,6 +40,13 @@ class IssuesViewController: ListViewController<IssueCell> {
         guard let viewConroller = segue.destination as? IssueDetailViewController else { return }
         let issue = datasource[indexPath.item]
         viewConroller.issue = issue
+        viewConroller.reloadIssue = { [weak self] (issue: Model.Issue) in
+            guard let `self` = self else { return }
+            guard let index = self.datasource.index(of: issue) else { return }
+            self.datasource[index] = issue
+            let indexPath = IndexPath(item: index, section: 0)
+            self.collectionView.reloadItems(at: [indexPath])
+        }
     }
  
     

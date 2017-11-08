@@ -11,8 +11,13 @@ import Alamofire
 
 class IssueDetailViewController: ListViewController<IssueCommentCell> {
 
-    var issue: Model.Issue!
+    var issue: Model.Issue! {
+        didSet {
+            collectionView?.reloadData()
+        }
+    }
     var headerSize: CGSize = CGSize.zero
+    var reloadIssue: ((Model.Issue) -> Void)?
     @IBOutlet override var collectionView: UICollectionView! {
         get {
             return collectionView_
@@ -60,7 +65,7 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IssueDetailHeaderView", for: indexPath) as? IssueDetailHeaderView ?? IssueDetailHeaderView()
             
             headerView.update(data: issue)
-//            headerView.stateButton.addTarget(self, action: #selector(stateButtonTapped), for: .touchUpInside)
+            headerView.stateButton.addTarget(self, action: #selector(stateButtonTapped), for: .touchUpInside)
             return headerView
             
         case UICollectionElementKindSectionFooter:
@@ -95,20 +100,11 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     */
 
     @IBAction func sendButtonTapped(_ sender: Any) {
-        let comment = commentTextField.text ?? ""
-        App.api.createComment(owner: owner, repo: repo, number: issue.number, comment: comment) { [weak self] (dataResponse: DataResponse<Model.Comment>) in
-            guard let `self` = self else { return }
-            switch dataResponse.result {
-            case .success(let comment):
-                self.addComment(comment: comment)
-                self.commentTextField.text = ""
-                self.commentTextField.resignFirstResponder()
-                
-                break
-            case .failure:
-                break
-            }
-        }
+        send()
+    }
+    
+    @objc func stateButtonTapped() {
+        changeState()
     }
 }
 
@@ -145,8 +141,52 @@ extension IssueDetailViewController {
         let newIndexPath = IndexPath(item: datasource.count, section: 0)
         datasource.append(comment)
         collectionView.insertItems(at: [newIndexPath])
-        
         collectionView.scrollToItem(at: newIndexPath, at: .bottom, animated: true)
-        
+    }
+    
+    func send() {
+        let comment = commentTextField.text ?? ""
+        App.api.createComment(owner: owner, repo: repo, number: issue.number, comment: comment) { [weak self] (dataResponse: DataResponse<Model.Comment>) in
+            guard let `self` = self else { return }
+            switch dataResponse.result {
+            case .success(let comment):
+                self.addComment(comment: comment)
+                self.commentTextField.text = ""
+                self.commentTextField.resignFirstResponder()
+                
+                break
+            case .failure:
+                self.commentTextField.resignFirstResponder()
+                break
+            }
+        }
+    }
+    
+    func changeState() {
+        switch issue.state {
+        case .open:
+            App.api.closeIssue(owner: owner, repo: repo, number: issue.number, issue: issue, completionHandler: { [weak self] (dataResponse: DataResponse<Model.Issue>) in
+                switch dataResponse.result {
+                case .success(let issue):
+                    print("issue: \(issue)")
+                    self?.issue = issue
+                    self?.reloadIssue?(issue)
+                case .failure(let error):
+                    print(error)
+                }
+                
+            })
+        case .closed:
+            App.api.openIssue(owner: owner, repo: repo, number: issue.number, issue: issue, completionHandler: { [weak self] (dataResponse: DataResponse<Model.Issue>) in
+                switch dataResponse.result {
+                case .success(let issue):
+                    print("issue: \(issue)")
+                    self?.issue = issue
+                    self?.reloadIssue?(issue)
+                case .failure(let error):
+                    print(error)
+                }
+            })
+        }
     }
 }

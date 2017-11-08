@@ -94,12 +94,36 @@ struct GitHubAPI: API {
             completionHandler(result)
         }
     }
+    func closeIssue(owner: String, repo: String, number: Int, issue: Model.Issue, completionHandler: @escaping (DataResponse<Model.Issue>) -> Void) {
+        var dict = issue.toDict
+        dict["state"] = Model.Issue.State.closed.rawValue
+        GitHubRouter.manager.request(GitHubRouter.editIssue(owner: owner, repo: repo, number: number, parameters: dict)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
+            let result = dataResponse.map({ (json: JSON) -> Model.Issue in
+                Model.Issue(json: json)
+            })
+            completionHandler(result)
+        }
+        
+    }
+    
+    func openIssue(owner: String, repo: String, number: Int, issue: Model.Issue, completionHandler: @escaping (DataResponse<Model.Issue>) -> Void) {
+        var dict = issue.toDict
+        dict["state"] = Model.Issue.State.open.rawValue
+        GitHubRouter.manager.request(GitHubRouter.editIssue(owner: owner, repo: repo, number: number, parameters: dict)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
+            let result = dataResponse.map({ (json: JSON) -> Model.Issue in
+                Model.Issue(json: json)
+            })
+            completionHandler(result)
+        }
+        
+    }
 }
 
 enum GitHubRouter {
     case repoIssues(owner: String, repo: String, parameters: Parameters)
     case issueComment(owner: String, repo: String, number: Int, parameters: Parameters)
     case createComment(owner: String, repo: String, number: Int, parameters: Parameters)
+    case editIssue(owner: String, repo: String, number: Int, parameters: Parameters)
 }
 
 extension GitHubRouter: URLRequestConvertible {
@@ -121,6 +145,9 @@ extension GitHubRouter: URLRequestConvertible {
             return .get
         case .createComment:
             return .post
+        case .editIssue
+            :
+            return .patch
         }
     }
     
@@ -132,6 +159,8 @@ extension GitHubRouter: URLRequestConvertible {
             return "/repos/\(owner)/\(repo)/issues/\(number)/comments"
         case let .createComment(owner, repo, number, _):
             return "/repos/\(owner)/\(repo)/issues/\(number)/comments"
+        case let .editIssue(owner, repo, number, _):
+            return "/repos/\(owner)/\(repo)/issues/\(number)"
         }
     }
     
@@ -145,16 +174,18 @@ extension GitHubRouter: URLRequestConvertible {
         }
         
         switch self {
-            case let .repoIssues(_, _, parameters):
+        case let .repoIssues(_, _, parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-            case let .issueComment(_, _, _, parameters):
+        case let .issueComment(_, _, _, parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
         case let .createComment(_, _, _, parameters):
+            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
+        case let .editIssue(_, _, _, parameters):
             urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         }
         
         return urlRequest
     }
-
-
+    
+    
 }

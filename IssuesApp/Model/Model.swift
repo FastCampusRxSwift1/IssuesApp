@@ -63,6 +63,38 @@ extension Model.Issue.State {
     }
 }
 
+extension Model.Issue {
+    var toDict: [String: Any] {
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        var dict: [String : Any] = [
+            "id": id,
+            "number": number,
+            "title": title,
+            "comments": comments,
+            "body": body,
+            "state": state.rawValue,
+            "user": [
+                "id": user.id,
+                "login": user.login,
+                "acatar_url": (user.avatarURL?.absoluteString ?? "")]
+        ]
+        if let createdAt = createdAt {
+            dict["createdAt"] = format.string(from: createdAt)
+        }
+        if let updatedAt = updatedAt {
+            dict["updatedAt"] = format.string(from: updatedAt)
+        }
+        if let closedAt = closedAt {
+            dict["closedAt"] = format.string(from: closedAt)
+        }
+        
+        print("dict: \(dict)")
+        return dict
+        
+    }
+}
+
 extension UIColor {
     func toImage(_ size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)

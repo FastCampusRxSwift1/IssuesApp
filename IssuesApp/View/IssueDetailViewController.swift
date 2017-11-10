@@ -59,11 +59,15 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-            
-    
+        case UICollectionElementKindSectionHeader:
+            assert(false, "unexpected element Kind")
+            return UICollectionReusableView()
+        case UICollectionElementKindSectionFooter:
+            assert(false, "unexpected element Kind")
+            return UICollectionReusableView()
         default:
-            
             assert(false, "Unexpected element kind")
+            return UICollectionReusableView()
         }
     }
     

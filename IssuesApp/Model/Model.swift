@@ -65,3 +65,8 @@ extension Model {
         }
     }
 }
+
+extension Model {
+    struct Comment {
+    }
+}

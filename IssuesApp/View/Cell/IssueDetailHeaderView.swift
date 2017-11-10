@@ -59,53 +59,15 @@ class IssueDetailHeaderView: UICollectionReusableView {
 // MARK: - setup
 extension IssueDetailHeaderView {
     func setup() {
-        stateButton.clipsToBounds = true
-        stateButton.layer.cornerRadius = 2
-        
-        stateButton.setTitle(Model.Issue.State.open.rawValue, for: .normal)
-        stateButton.setBackgroundImage(Model.Issue.State.open.color.toImage(), for: .normal)
-        stateButton.setTitle(Model.Issue.State.closed.rawValue, for: .selected)
-        stateButton.setBackgroundImage(Model.Issue.State.closed.color.toImage(), for: .selected)
-        
-        avatarImageView.clipsToBounds = true
-        avatarImageView.layer.cornerRadius = avatarImageView.bounds.midX
-        
-        commentContainerView.clipsToBounds = true
-        commentContainerView.layer.cornerRadius = 2
-        commentContainerView.layer.borderColor = UIColor.groupTableViewBackground.cgColor
-        commentContainerView.layer.borderWidth = 1
-        
     }
     static func headerSize(issue: Model.Issue, width: CGFloat) -> CGSize {
-        
-        IssueDetailHeaderView.estimateSizeCell.update(data: issue)
-        let targetSize  = CGSize(width: width, height: 0)
-        let size = IssueDetailHeaderView.estimateSizeCell.systemLayoutSizeFitting(
-            targetSize,
-            withHorizontalFittingPriority: UILayoutPriorityRequired,
-            verticalFittingPriority: UILayoutPriorityDefaultLow
-        )
-        let width = size.width == 0 ? IssueDetailHeaderView.estimateSizeCell.bounds.width : size.width
-        let height = size.height == 0 ? IssueDetailHeaderView.estimateSizeCell.bounds.height : size.height
-        let cellSize = CGSize(width: width, height: height)
-        return cellSize
+        return CGSize.zero
     }
 }
 
 extension IssueDetailHeaderView {
-    func update(data: Model.Issue, withImage: Bool = true) {
-        
-        let createdAt = data.createdAt?.string(dateFormat: "dd MMM yyyy") ?? "-"
-        titleLabel.text = data.title
-        stateButton.isSelected = data.state == .closed
-        infoLabel.text = "\(data.user.login) \(data.state.rawValue) this issue on \(createdAt) · \(data.comments) comments"
-        
-        //body
-        if let url = data.user.avatarURL, withImage {
-            avatarImageView.af_setImage(withURL: url)
-        }
-        commentInfoLabel.text = "\(data.user.login) commented on \(createdAt)"
-        commentBodyLabel.text = data.body
+    func update(data: Model.Issue) {
+
     }
     
 }

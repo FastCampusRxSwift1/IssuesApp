@@ -32,16 +32,16 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addKeyboardNotification()
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        removeKeyboardNOtification()
+        
     }
     
     override func viewDidLoad() {
-        api = App.api.issueComment(owner: owner, repo: repo, number: issue.number)
+        
         super.viewDidLoad()
         
         title = "#\(issue.number)"
@@ -60,20 +60,7 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
             
-        case UICollectionElementKindSectionHeader:
-            
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IssueDetailHeaderView", for: indexPath) as? IssueDetailHeaderView ?? IssueDetailHeaderView()
-            
-            headerView.update(data: issue)
-            headerView.stateButton.addTarget(self, action: #selector(stateButtonTapped), for: .touchUpInside)
-            return headerView
-            
-        case UICollectionElementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "LoadMoreFooterView", for: indexPath) as? LoadMoreFooterView ?? LoadMoreFooterView()
-            
-            loadMoreCell = footerView
-            return footerView
-            
+    
         default:
             
             assert(false, "Unexpected element kind")
@@ -82,11 +69,7 @@ class IssueDetailViewController: ListViewController<IssueCommentCell> {
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        if headerSize == CGSize.zero {
-            headerSize = IssueDetailHeaderView.headerSize(issue: issue, width: collectionView.frame.width)
-            
-        }
-        return headerSize
+        return CGSize.zero
     }
 
     /*
@@ -112,23 +95,7 @@ extension IssueDetailViewController {
     
     func addKeyboardNotification() {
         NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil, queue: nil) { [weak self] (notifiaction: Notification) in
-            guard let `self` = self else { return }
-            guard let keyboardBounds = notifiaction.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect else { return }
-            guard let animationDuration = notifiaction.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
-            guard let animationCurve = notifiaction.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? UInt else { return }
-            let animationOptions = UIViewAnimationOptions(rawValue: animationCurve)
-            let keyboardHeight = keyboardBounds.height
-            let inputBottom = self.view.frame.height - keyboardBounds.origin.y
-            print("inputBottom: \(inputBottom)")
-            print("keyboard: \(keyboardHeight)")
-            var inset = self.collectionView.contentInset
-            inset.bottom = inputBottom + 46
-            self.collectionView.contentInset = inset
-            self.inputViewBottomConstraint.constant = inputBottom
-            UIView.animate(withDuration: animationDuration, delay: 0, options: animationOptions, animations: {
-                self.view.layoutIfNeeded()
-            }, completion: nil)
-        }
+            }
     }
     
     func removeKeyboardNOtification() {
@@ -138,55 +105,14 @@ extension IssueDetailViewController {
 
 extension IssueDetailViewController {
     func addComment(comment: Model.Comment) {
-        let newIndexPath = IndexPath(item: datasource.count, section: 0)
-        datasource.append(comment)
-        collectionView.insertItems(at: [newIndexPath])
-        collectionView.scrollToItem(at: newIndexPath, at: .bottom, animated: true)
+
     }
     
     func send() {
-        let comment = commentTextField.text ?? ""
-        App.api.createComment(owner: owner, repo: repo, number: issue.number, comment: comment) { [weak self] (dataResponse: DataResponse<Model.Comment>) in
-            guard let `self` = self else { return }
-            switch dataResponse.result {
-            case .success(let comment):
-                self.addComment(comment: comment)
-                self.commentTextField.text = ""
-                self.commentTextField.resignFirstResponder()
-                
-                break
-            case .failure:
-                self.commentTextField.resignFirstResponder()
-                break
-            }
-        }
+
     }
     
     func changeState() {
-        switch issue.state {
-        case .open:
-            App.api.closeIssue(owner: owner, repo: repo, number: issue.number, issue: issue, completionHandler: { [weak self] (dataResponse: DataResponse<Model.Issue>) in
-                switch dataResponse.result {
-                case .success(let issue):
-                    print("issue: \(issue)")
-                    self?.issue = issue
-                    self?.reloadIssue?(issue)
-                case .failure(let error):
-                    print(error)
-                }
-                
-            })
-        case .closed:
-            App.api.openIssue(owner: owner, repo: repo, number: issue.number, issue: issue, completionHandler: { [weak self] (dataResponse: DataResponse<Model.Issue>) in
-                switch dataResponse.result {
-                case .success(let issue):
-                    print("issue: \(issue)")
-                    self?.issue = issue
-                    self?.reloadIssue?(issue)
-                case .failure(let error):
-                    print(error)
-                }
-            })
-        }
+       
     }
 }

@@ -76,66 +76,28 @@ struct GitHubAPI: API {
     
     func issueComment(owner: String, repo: String, number: Int) -> (Int, @escaping CommentResponsesHandler) -> Void {
         return { page, handler in
-            let parameters: Parameters = ["page": page]
-            GitHubRouter.manager.request(GitHubRouter.issueComment(owner: owner, repo: repo, number: number, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-                let result = dataResponse.map({ (json: JSON) -> [Model.Comment] in
-                    return json.arrayValue.map {
-                        Model.Comment(json: $0)
-                    }
-                })
-                handler(result)
-            }
+ 
         }
     }
     
     func createComment(owner: String, repo: String, number: Int, comment: String, completionHandler: @escaping (DataResponse<Model.Comment>) -> Void ) {
-        let parameters: Parameters = ["body": comment]
-        GitHubRouter.manager.request(GitHubRouter.createComment(owner: owner, repo: repo, number: number, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-            let result = dataResponse.map({ (json: JSON) -> Model.Comment in
-                Model.Comment(json: json)
-            })
-            completionHandler(result)
-        }
+
     }
     func closeIssue(owner: String, repo: String, number: Int, issue: Model.Issue, completionHandler: @escaping (DataResponse<Model.Issue>) -> Void) {
-        var dict = issue.toDict
-        dict["state"] = Model.Issue.State.closed.rawValue
-        GitHubRouter.manager.request(GitHubRouter.editIssue(owner: owner, repo: repo, number: number, parameters: dict)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-            let result = dataResponse.map({ (json: JSON) -> Model.Issue in
-                Model.Issue(json: json)
-            })
-            completionHandler(result)
-        }
+
     }
     
     func openIssue(owner: String, repo: String, number: Int, issue: Model.Issue, completionHandler: @escaping (DataResponse<Model.Issue>) -> Void) {
-        var dict = issue.toDict
-        dict["state"] = Model.Issue.State.open.rawValue
-        GitHubRouter.manager.request(GitHubRouter.editIssue(owner: owner, repo: repo, number: number, parameters: dict)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-            let result = dataResponse.map({ (json: JSON) -> Model.Issue in
-                Model.Issue(json: json)
-            })
-            completionHandler(result)
-        }
+
     }
     
     func createIssue(owner: String, repo: String, title: String, body: String, completionHandler: @escaping (DataResponse<Model.Issue>) -> Void ) {
-        let parameters: Parameters = ["title": title, "body": body]
-        GitHubRouter.manager.request(GitHubRouter.createIssue(owner: owner, repo: repo, parameters: parameters)).responseSwiftyJSON { (dataResponse: DataResponse<JSON>) in
-            let result = dataResponse.map({ (json: JSON) -> Model.Issue in
-                Model.Issue(json: json)
-            })
-            completionHandler(result)
-        }
     }
 }
 
 enum GitHubRouter {
     case repoIssues(owner: String, repo: String, parameters: Parameters)
-    case issueComment(owner: String, repo: String, number: Int, parameters: Parameters)
-    case createComment(owner: String, repo: String, number: Int, parameters: Parameters)
-    case editIssue(owner: String, repo: String, number: Int, parameters: Parameters)
-    case createIssue(owner: String, repo: String, parameters: Parameters)
+
 }
 
 extension GitHubRouter: URLRequestConvertible {
@@ -152,29 +114,14 @@ extension GitHubRouter: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-        case .repoIssues,
-             .issueComment:
+        case .repoIssues:
             return .get
-        case .createComment,
-             .createIssue:
-            return .post
-        case .editIssue
-            :
-            return .patch
         }
     }
     
     var path: String {
         switch self {
         case let .repoIssues(owner, repo, _):
-            return "/repos/\(owner)/\(repo)/issues"
-        case let .issueComment(owner, repo, number, _):
-            return "/repos/\(owner)/\(repo)/issues/\(number)/comments"
-        case let .createComment(owner, repo, number, _):
-            return "/repos/\(owner)/\(repo)/issues/\(number)/comments"
-        case let .editIssue(owner, repo, number, _):
-            return "/repos/\(owner)/\(repo)/issues/\(number)"
-        case let .createIssue(owner, repo, _):
             return "/repos/\(owner)/\(repo)/issues"
         }
     }
@@ -191,14 +138,6 @@ extension GitHubRouter: URLRequestConvertible {
         switch self {
         case let .repoIssues(_, _, parameters):
             urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-        case let .issueComment(_, _, _, parameters):
-            urlRequest = try URLEncoding.default.encode(urlRequest, with: parameters)
-        case let .createComment(_, _, _, parameters):
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-        case let .editIssue(_, _, _, parameters):
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
-        case let .createIssue(_, _, parameters):
-            urlRequest = try JSONEncoding.default.encode(urlRequest, with: parameters)
         }
         
         return urlRequest
